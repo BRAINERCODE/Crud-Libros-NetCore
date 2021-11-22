@@ -1,0 +1,78 @@
+﻿@model IEnumerable<MicroserviceUser.Models.Libro>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@if (TempData["Mensaje"] != null)
+{
+    <span>@TempData["Mensaje"]</span>
+}
+<div>
+    <div>
+        <div>
+            <h3>List De Libros</h3>
+        </div>
+        <div>
+            <a asp-controller="Libros" asp-action="Create">Agregar Libro</a>
+        </div>
+    </div>
+    @if (Model.Count() > 0)
+    {
+        <table>
+            <thead>
+                <tr>
+                    
+                    <td>
+                        @Html.DisplayNameFor(m => m.titulo)
+                    </td>
+
+                    <td>
+                        @Html.DisplayNameFor(m => m.descripcion)
+                    </td>
+
+                    <td>
+                        @Html.DisplayNameFor(m => m.fechaDeLanzamiento)
+                    </td>
+
+                    <td>
+                        @Html.DisplayNameFor(m => m.Autor)
+                    </td>
+
+                    <td>
+                        @Html.DisplayNameFor(m => m.precio)
+                    </td>
+
+                    <td>
+                        Acciones
+                    </td>
+                </tr>
+            <thead>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.titulo</td>
+                        <td>@item.descripcion</td>
+                        <td>@item.fechaDeLanzamiento</td>
+                        <td>@item.Autor</td>
+                        <td>@item.precio</td>
+                        <td>
+                            <a asp-controller="Libros" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                            <a asp-controller="Libros" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            </thead>
+        </table>
+    }
+    else
+    {
+        <hr/>
+        <span>No hay registros XD....</span>
+
+    }
+
+</div>
+
